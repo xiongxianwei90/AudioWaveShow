@@ -17,7 +17,7 @@ import com.tian.audio.wave.dao.FFTData;
 /**
  * 操作画笔进行各个bar的绘制工作
  */
-public class BarGraphRenderer extends Renderer{
+public class BarGraphRenderer2 extends Renderer{
   private int mDivisions;
   private Paint mPaint;
   private boolean mTop;
@@ -28,9 +28,9 @@ public class BarGraphRenderer extends Renderer{
    * @param paint - Paint to draw lines with
    * @param top - whether to draw the lines at the top of the canvas, or the bottom
    */
-  public BarGraphRenderer(int divisions,
-                          Paint paint,
-                          boolean top){
+  public BarGraphRenderer2(int divisions,
+                           Paint paint,
+                           boolean top){
     super();
     mDivisions = divisions;
     mPaint = paint;

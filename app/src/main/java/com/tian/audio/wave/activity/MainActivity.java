@@ -12,6 +12,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 
+import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.tian.audio.wave.R;
 import com.tian.audio.wave.renderer.BarGraphRenderer;
 import com.tian.audio.wave.renderer.CircleBarRenderer;
@@ -19,6 +20,10 @@ import com.tian.audio.wave.renderer.CircleRenderer;
 import com.tian.audio.wave.renderer.LineRenderer;
 import com.tian.audio.wave.utils.TunnelPlayerWorkaround;
 import com.tian.audio.wave.widget.VisualizerView;
+
+import io.reactivex.functions.Consumer;
+
+import static android.Manifest.permission.RECORD_AUDIO;
 
 
 /**
@@ -41,7 +46,16 @@ public class MainActivity extends Activity {
     {
         super.onResume();
         initTunnelPlayerWorkaround();
-        init();
+
+        RxPermissions rxPermissions = new RxPermissions(this);
+        rxPermissions.request(RECORD_AUDIO).subscribe(new Consumer<Boolean>() {
+
+            @Override
+            public void accept(Boolean aBoolean) throws Exception {
+                init();
+            }
+        });
+
     }
 
     @Override
@@ -115,8 +129,8 @@ public class MainActivity extends Activity {
         paint.setStrokeWidth(50f);
         paint.setAntiAlias(true);
         paint.setColor(Color.argb(200, 56, 138, 252));
-        BarGraphRenderer barGraphRendererBottom = new BarGraphRenderer(16, paint, false);
-        mVisualizerView.addRenderer(barGraphRendererBottom);
+//        BarGraphRenderer barGraphRendererBottom = new BarGraphRenderer(16, paint, false);
+//        mVisualizerView.addRenderer(barGraphRendererBottom);
 
         //顶部柱状条
         Paint paint2 = new Paint();
